@@ -1,6 +1,6 @@
 # Bonsai Files:
 ## 1. Arduino stepper motor
-Controls a stepper motor using a RAMPS V1.4 and motor drivers
+Controls a stepper motor using a RAMPS V1.4 and XXXX motor drivers
 
 ### pins
 X_STEP_PIN         54
@@ -37,5 +37,15 @@ E_DIR_PIN          28
 
 E_ENABLE_PIN       24
 
-## 2. 
-## 3. 
+## 2. Arduino servo
+Controls servo motors as an alternative to stepper motors - don't need ramps board but servos aren't as strong
+
+
+## 3. DLC label file
+Labels videos with exported DLC model 
+
+## 4. basic dispenser
+basic control of the dispenser
+
+## 5. Camera control
+basic control of FLIR camera
