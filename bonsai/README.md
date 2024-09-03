@@ -1,6 +1,6 @@
 # Bonsai Files:
 ## 1. Arduino stepper motor
-Controls a stepper motor using a RAMPS V1.4 and XXXX motor drivers
+Controls a stepper motor using a RAMPS V1.4 and XXXX motor drivers. Requires basic firmata protocol to be uploaded to arduino. Ensure baud rate is the same as in the uploaded firmata file.
 
 ### pins
 X_STEP_PIN         54
