@@ -25,7 +25,7 @@
  * Cricket specific numbers
  */
 #define num_of_chambers   8
-#define full_steps_per_rotation 100 //1.8 deg per full step, 360/1.8=200
+#define full_steps_per_rotation 28 //1.8 deg per full step, 360/1.8=200
 //3.942 diameter inside of ridge, 1.875in diameter inside of ridge
 #define pulley_ratio (3.942/1.875) //motor is 1/2 the size of chamber
 #define microstepping 8 //microstepping mode
@@ -42,7 +42,7 @@
 //#include <Stepper.h>
 #include <AccelStepper.h> //ManageLibraries > AccelStepper
  
-const int turn = total_steps_for_rotation/num_of_chambers;//one turn's steps is total steps / number of chambers
+const int turn = 50; //total_steps_for_rotation/num_of_chambers;//one turn's steps is total steps / number of chambers
 //Stepper cricketFeeder[4] = { Stepper(200, X_STEP_PIN, X_DIR_PIN),
 //                            Stepper(200, Y_STEP_PIN, Y_DIR_PIN),
 //                            Stepper(200, Z_STEP_PIN, Z_DIR_PIN),
@@ -58,9 +58,7 @@ AccelStepper cricketFeeder[4] =
   AccelStepper(AccelStepper::DRIVER, E_STEP_PIN, E_DIR_PIN)    //4
   };
 
-int turnCounter[4] = {0,
-                      0,
-                      0,
+int turnCounter[2] = {0,
                       0};
 bool enabled = HIGH;
 
@@ -94,7 +92,7 @@ void setup() {
 
 
    Serial.begin(9600);
-   Serial.println("Program Start: enter t or r to turn the steppers 1/3 and 2/4 respectively. \nPress 1,2,3,4 to increment the respective motors a small amount. \nPress d to disable steppers, e to enable steppers.");
+   Serial.println("Program Start: enter r or b to turn the steppers 1/3 and 2/4 respectively. \nPress 1,2,3,4 to increment the respective motors a small amount. \nPress d to disable steppers, e to enable steppers.");
    Serial.print("Steps per turn: ");
    Serial.println(turn);
    delay(200);
@@ -122,49 +120,37 @@ void loop() {
     digitalWrite(E_ENABLE_PIN    , LOW);
     Serial.println("Steppers enabled");
   }
-  if(input=='t' && enabled == HIGH){
-    //Serial.println("t");
+  if(input=='w' && enabled == HIGH){
+    Serial.println("white chambers");
     if(turnCounter[0]==cricket_per_chamber){
-      Serial.println("t! Chambers 1&3 are fully turned");
+      Serial.println("Chambers 1&3 are fully turned");
     }else{
       turnTask(0);
-      Serial.print("t! Turning motors 1&3... Turn ");
+      Serial.print("Turning motors 1&3... Turn ");
       turnCounter[0]++;
       Serial.println(turnCounter[0]);
     }
   }
-  if(input=='r' && enabled == HIGH){
-    //Serial.println("r");
+  if(input=='b' && enabled == HIGH){
+    Serial.println("blue chambers");
     if(turnCounter[1]==cricket_per_chamber){
-      Serial.println("r! Chambers 2&4 are fully turned");
+      Serial.println("Chambers 2&4 are fully turned");
     }else{
       turnTask(1);
-      Serial.print("r! Turning motors 2&4... Turn ");
+      Serial.print("Turning motors 2&4... Turn ");
       turnCounter[1]++;
       Serial.println(turnCounter[1]);
     }
- }
-
-// if(input=='1'||input=='2'||input=='3'||input=='4'){
-//   //turnIncrement((int) input - 49); //offset by ascii value of number key?
-//    Serial.print("incrementing motor ");
-//   Serial.println(input);
-// }
-//}
-//
-  if(input=='1'||input=='2'||input=='3'||input=='4' && enabled == HIGH){
-    Serial.println("turn one chamber");
-    if(turnCounter[input]==cricket_per_chamber){
-      Serial.println(" Chamber is fully turned");
-    }
-    else{
-      turnOne(input);
-      Serial.print("Turning motor ");
-      Serial.print(input);
-      turnCounter[input]++;
-      Serial.println(turnCounter[input]);
-    }
   }
+  if(input=='1'||input=='2'||input=='3'||input=='4'){
+    //turnIncrement((int) input - 49); //offset by ascii value of number key?
+    Serial.print("incrementing motor ");
+    Serial.println(input);
+    
+  }
+}
+
+
 //void turnTask (int x) {//for normal stepper library
 //      sendSignal();
 //      cricketFeeder[x].setSpeed(3000);
@@ -175,10 +161,10 @@ void loop() {
 //        cricketFeeder[x].step(-4);
 //        delay(10);
 //      }
-}
+//}
 
 void turnTask (int x) {//for accelstepper library
-      Serial.println("turntask");
+      //Serial.println("turntask");
       sendSignal();
       setStepperDefaults(x);
       //Serial.println(turn);
@@ -194,27 +180,11 @@ void turnTask (int x) {//for accelstepper library
         cricketFeeder[x+2].run();
       }
 }
-
-void turnOne (int x){ //turn one motor at a time
-      Serial.println("turnOne");
-      sendSignal();
-      setStepperDefaults(x);
-      //Serial.println(turn);
-      cricketFeeder[x].setCurrentPosition(0); //set current position as zero
-      //Serial.println(cricketFeeder[x].distanceToGo());
-      cricketFeeder[x].moveTo(turn);
-      //Serial.println(cricketFeeder[x].distanceToGo());
-      while(cricketFeeder[x].distanceToGo() > 0)
-      {
-        cricketFeeder[x].run();
-      }
-}
-
 void setStepperDefaults(int x){
-    cricketFeeder[x].setMaxSpeed(200.0); //200 is default
-    cricketFeeder[x+2].setMaxSpeed(200.0); //200 is default,
-    cricketFeeder[x].setAcceleration(100.0); //100 is default
-    cricketFeeder[x+2].setAcceleration(100.0); //100 is default
+    cricketFeeder[x].setMaxSpeed(100.0); //200 is default
+    cricketFeeder[x+2].setMaxSpeed(100.0); //200 is default,
+    cricketFeeder[x].setAcceleration(50.0); //100 is default
+    cricketFeeder[x+2].setAcceleration(50.0); //100 is default
 }
 
 //void turnIncrement(int x){
