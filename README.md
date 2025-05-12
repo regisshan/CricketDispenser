@@ -1,18 +1,21 @@
 # CricketDispenser
 files for assembly and programing of the TG lab cricket dispenser system
 
-todo: insert pic/gif of dispenser here
+![rendering of assembled dispenser](/images/Final - all together now.png)
+
 
 
 ## Assembling dispenser
 1. Print out all files in 'design files' folder:
 
-For each setup:
+note: the cricket cartridge and dispenser base should be able to print on a single  
+
+
 
 **Cricket cartridge**
-   - 4x bucket holder
-   - 24x glass tube holder
-   - 4x hex cap
+   - bucket holder
+   - 6x glass tube holder
+   - hex cap
 
 **Dispenser base**
   - hex holder
@@ -23,7 +26,8 @@ For each setup:
    - wheel attachment
    - outer case
    - pneumatic joint holder
-  
+
+2. 
 3. purchase or obtain materials from BOM list
 
 4. 
