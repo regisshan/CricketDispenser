@@ -1,14 +1,15 @@
 # CricketDispenser
 files for assembly and programing of the TG lab cricket dispenser system
 
-![rendering of assembled dispenser](/main/images/Final - all together now.png)
+![rendering of assembled dispenser](/CricketDispenser/blob/main/images/Final%20-%20all%20together%20now.png)
+
 
 
 
 ## Assembling dispenser
 1. Print out all files in 'design files' folder:
 
-note: the cricket cartridge and dispenser base should be able to print on a single  
+note: the cricket cartridge and dispenser base should be able to print on a single print bed. 
 
 
 
