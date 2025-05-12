@@ -1,7 +1,7 @@
 # CricketDispenser
 files for assembly and programing of the TG lab cricket dispenser system
 
-![rendering of assembled dispenser](/images/Final - all together now.png)
+![rendering of assembled dispenser](/main/images/Final - all together now.png)
 
 
 
